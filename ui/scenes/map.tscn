@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=3 uid="uid://0g7svq6wy2l0"]
+
+[ext_resource type="PackedScene" uid="uid://nbq3gyhfrriq" path="res://ui/elements/2d_map_grid.tscn" id="1_cb6rs"]
+[ext_resource type="Texture2D" uid="uid://7xfb1vqkb6oh" path="res://ui/elements/hex-map-base.png" id="2_c8dlw"]
+[ext_resource type="Shader" path="res://addons/outline.gdshader" id="2_df7jr"]
+[ext_resource type="Texture2D" uid="uid://gptftewcdehn" path="res://ui/elements/map-sprites.png" id="3_3kja5"]
+
+[sub_resource type="Theme" id="Theme_5rroy"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86dha"]
+shader = ExtResource("2_df7jr")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 5.955
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6i08"]
+resource_local_to_scene = true
+atlas = ExtResource("3_3kja5")
+region = Rect2(0, 0, 633.574, 629.355)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4dqy"]
+atlas = ExtResource("3_3kja5")
+region = Rect2(1167.89, 657.385, 601.482, 520.611)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g1vc"]
+resource_local_to_scene = true
+atlas = ExtResource("3_3kja5")
+region = Rect2(40.7404, 1274.03, 475.12, 459.957)
+
+[node name="map" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_5rroy")
+
+[node name="2d_map_grid" parent="Control" instance=ExtResource("1_cb6rs")]
+position = Vector2(459, 323)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 105
+theme_override_constants/margin_right = 110
+theme_override_constants/margin_bottom = 50
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer"]
+custom_minimum_size = Vector2(175, 175)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture = ExtResource("2_c8dlw")
+expand_mode = 1
+flip_v = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/TextureRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/TextureRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+material = SubResource("ShaderMaterial_86dha")
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+texture = SubResource("AtlasTexture_p6i08")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Tree"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer/HBoxContainer2"]
+material = SubResource("ShaderMaterial_86dha")
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+texture = SubResource("AtlasTexture_a4dqy")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Water"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer/HBoxContainer3"]
+material = SubResource("ShaderMaterial_86dha")
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+texture = SubResource("AtlasTexture_1g1vc")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Control/MarginContainer/TextureRect/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Rock"

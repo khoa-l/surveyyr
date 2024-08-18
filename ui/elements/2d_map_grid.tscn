@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://nbq3gyhfrriq"]
+
+[ext_resource type="Texture2D" uid="uid://7xfb1vqkb6oh" path="res://ui/elements/hex-map-base.png" id="1_devu6"]
+[ext_resource type="Texture2D" uid="uid://gptftewcdehn" path="res://ui/elements/map-sprites.png" id="1_xr1b3"]
+[ext_resource type="Texture2D" uid="uid://jiadpn15kk6u" path="res://ui/elements/hexgrid.png" id="2_fa1xp"]
+[ext_resource type="Shader" path="res://addons/outline.gdshader" id="2_pi260"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3rsup"]
+shader = ExtResource("2_pi260")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 10.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wthre"]
+texture = ExtResource("1_xr1b3")
+texture_region_size = Vector2i(590, 590)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_w5thl"]
+tile_shape = 3
+tile_size = Vector2i(500, 557)
+sources/1 = SubResource("TileSetAtlasSource_wthre")
+
+[node name="2d_map_grid" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_devu6")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-17, -13)
+scale = Vector2(0.359649, 0.342466)
+texture = ExtResource("2_fa1xp")
+
+[node name="TileMap" type="TileMap" parent="."]
+material = SubResource("ShaderMaterial_3rsup")
+scale = Vector2(0.07, 0.07)
+tile_set = SubResource("TileSet_w5thl")
+format = 2
+layer_0/tile_data = PackedInt32Array(-196613, 1, 0, -196612, 1, 0, -196611, 1, 0, -196610, 1, 0, -196609, 1, 0, -131074, 1, 0, -65538, 1, 0, -2, 1, 0, -3, 1, 0, -4, 1, 0, -5, 1, 0, -6, 1, 0, -65541, 1, 0, -131077, 1, 0, -131076, 1, 0, -65540, 1, 0, 3, 65537, 1, 2, 65537, 1, 65537, 65537, 1, 131073, 65537, 1, 196608, 65537, 1, 196609, 65537, 1, 131074, 65537, 1, 131075, 65537, 1, 65539, 65537, 1, 262139, 1, 2, 262138, 1, 2, 196603, 1, 2)
