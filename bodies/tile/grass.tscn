@@ -1,54 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2rq1dd8mclhh"]
+[gd_scene load_steps=5 format=3 uid="uid://bstytgjr2sejw"]
 
 [ext_resource type="PackedScene" uid="uid://blvypnmdghkp8" path="res://bodies/tile/hex_grass.gltf" id="1_y6meh"]
-[ext_resource type="ArrayMesh" uid="uid://6xbre54cwv77" path="res://bodies/tile/grass_straw.obj" id="2_kg13o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwpb8"]
+albedo_color = Color(0.0333333, 0.5, 0, 1)
 
 [sub_resource type="GDScript" id="GDScript_svmfq"]
-script/source = "extends MeshInstance3D
+script/source = "extends Node3D
 
-#var face_count = self.mesh.get_surface_count()
-@export var grass_mesh : Mesh
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
-	#for face in range(face_count):
-		#var arrays = mesh.surface_get_arrays(face)
-		#var normals = arrays[Mesh.ARRAY_NORMAL]
-		#var vertices = arrays[Mesh.ARRAY_VERTEX]
-		#
-		#if normals and vertices:
-			#for i in range(vertices.size()):
-				#var normal = normals[i]
-				#var vertex = vertices[i]
-				#
-				#if normal.y > 0.9:
-					#_place_instance_at(vertex)
+	place_tree()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func place_tree():
+	var tree = preload(\"res://bodies/tile/detail_treeA.gltf.glb\").instantiate()
 	
-#func _place_instance_at(position: Vector3):
-	#var multi_mesh = MultiMesh.new()
-	#multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
-	#multi_mesh.instance_count = 100
-	#multi_mesh.set_mesh(grass_mesh)
-	#
-	#for i in multi_mesh.visible_instance_count:
-		#multi_mesh.set_instance_transform(i, Transform3D(Basis(), position))
-	#
+	tree.scale = Vector3(2, 2, 2)
+	
+	# Get the surface normal of the object you want to place the tree on
+	var surface_normal = get_surface_normal()
+	
+	# Get the position where you want to place the tree
+	var position = get_placement_position()
+	
+	# Align the tree to the surface normal
+	var aligned_basis = align_up(tree.transform.basis, surface_normal)
+	
+	# Set the tree's transform
+	tree.transform = Transform3D(aligned_basis, position)
+	
+	# Add the tree as a child of the current node
+	add_child(tree)
+
+func align_up(node_basis: Basis, normal: Vector3) -> Basis:
+	var result = Basis()
+	var scale = node_basis.get_scale()
+	result.x = normal.cross(node_basis.z).normalized()
+	result.y = normal
+	result.z = result.x.cross(normal).normalized()
+	result = result.orthonormalized()
+	result.x *= scale.x 
+	result.y *= scale.y 
+	result.z *= scale.z 
+	return result
+
+func get_surface_normal() -> Vector3:
+	return Vector3.UP 
+
+func get_placement_position() -> Vector3:
+	return Vector3.ZERO
 "
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nu211"]
 data = PackedVector3Array(0, -0.05, -1.1547, -1, -1, -0.5773, 0, -1, -1.1547, 0, -0.05, -1.1547, -1, -0.05, -0.5773, -1, -1, -0.5773, 1, -0.05, 0.5774, 1, -1, -0.5773, 1, -1, 0.5774, 1, -0.05, 0.5774, 1, -0.05, -0.5773, 1, -1, -0.5773, -1, -0.05, -0.5773, -1, -1, 0.5773, -1, -1, -0.5773, -1, -0.05, -0.5773, -1, -0.05, 0.5773, -1, -1, 0.5773, 0, -0.05, 1.1547, 1, -1, 0.5774, 0, -1, 1.1547, 0, -0.05, 1.1547, 1, -0.05, 0.5774, 1, -1, 0.5774, -1, -0.05, 0.5773, 0, -1, 1.1547, -1, -1, 0.5773, -1, -0.05, 0.5773, 0, -0.05, 1.1547, 0, -1, 1.1547, 1, -0.05, -0.5773, 0, 0, -1.097, 0, -0.05, -1.1547, 1, -0.05, -0.5773, 0.95, 0, -0.5485, 0, 0, -1.097, 1, -0.05, 0.5774, 0.95, 0, -0.5485, 1, -0.05, -0.5773, 1, -0.05, 0.5774, 0.95, 0, 0.5485, 0.95, 0, -0.5485, 0, -0.05, 1.1547, 0.95, 0, 0.5485, 1, -0.05, 0.5774, 0, -0.05, 1.1547, 0, 0, 1.097, 0.95, 0, 0.5485, -1, -0.05, 0.5773, 0, 0, 1.097, 0, -0.05, 1.1547, -1, -0.05, 0.5773, -0.95, 0, 0.5485, 0, 0, 1.097, -1, -0.05, -0.5773, -0.95, 0, 0.5485, -1, -0.05, 0.5773, -1, -0.05, -0.5773, -0.95, 0, -0.5485, -0.95, 0, 0.5485, 0, -0.05, -1.1547, -0.95, 0, -0.5485, -1, -0.05, -0.5773, 0, -0.05, -1.1547, 0, 0, -1.097, -0.95, 0, -0.5485, 1, -0.05, -0.5773, 0, -1, -1.1547, 1, -1, -0.5773, 1, -0.05, -0.5773, 0, -0.05, -1.1547, 0, -1, -1.1547, 0, -1, 0, 1, -1, -0.5773, 0, -1, -1.1547, 0, -1, 0, 1, -1, 0.5774, 1, -1, -0.5773, 0, -1, 0, 0, -1, 1.1547, 1, -1, 0.5774, 0, -1, 0, -1, -1, 0.5773, 0, -1, 1.1547, 0, -1, 0, -1, -1, -0.5773, -1, -1, 0.5773, 0, -1, 0, 0, -1, -1.1547, -1, -1, -0.5773, 0, 0, 0, 0, 0, -1.097, 0.95, 0, -0.5485, 0, 0, 0, 0.95, 0, -0.5485, 0.95, 0, 0.5485, 0, 0, 0, 0.95, 0, 0.5485, 0, 0, 1.097, 0, 0, 0, 0, 0, 1.097, -0.95, 0, 0.5485, 0, 0, 0, -0.95, 0, 0.5485, -0.95, 0, -0.5485, 0, 0, 0, -0.95, 0, -0.5485, 0, 0, -1.097)
 
 [node name="hex_grass2" instance=ExtResource("1_y6meh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000204325, 0.00167036, -0.00206304)
 
 [node name="hex_grass" parent="." index="0"]
-transform = Transform3D(1.00841, 0, 0, 0, 1.0035, 0, 0, 0, 0.999367, 0.00192738, -0.00388968, 0.00259137)
+surface_material_override/0 = SubResource("StandardMaterial3D_xwpb8")
 script = SubResource("GDScript_svmfq")
-grass_mesh = ExtResource("2_kg13o")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="hex_grass" index="0"]
 

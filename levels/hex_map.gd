@@ -1,19 +1,29 @@
 extends Node3D
 
-var map_size = 100
+var map_size = 10
 var tile_size = 2
 var texture
+var tree_texture
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	texture = NoiseTexture2D.new()
 	texture.noise = FastNoiseLite.new()
+	texture.noise.seed = randi()
 	texture.noise.set_noise_type(FastNoiseLite.NoiseType.TYPE_SIMPLEX)
 	texture.noise.set_fractal_gain(0.5)
 	texture.noise.set_fractal_octaves(3)
 	texture.noise.set_fractal_lacunarity(2.5)
 	await texture.changed
+	
+	#tree_texture = NoiseTexture2D.new()
+	#tree_texture.noise = FastNoiseLite.new()
+	#tree_texture.noise.set_noise_type(FastNoiseLite.NoiseType.TYPE_SIMPLEX)
+	#tree_texture.noise.set_fractal_gain(1)
+	#tree_texture.noise.set_fractal_octaves(3)
+	#tree_texture.noise.set_fractal_lacunarity(2.5)
+	#await tree_texture.changed
 	
 	for child in self.get_children():
 		self.remove_child(child)

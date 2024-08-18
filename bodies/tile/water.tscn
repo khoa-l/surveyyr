@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://o8eytx86rxg3"]
+[gd_scene load_steps=3 format=3 uid="uid://cdttkut00bkur"]
 
 [ext_resource type="PackedScene" uid="uid://u23hrsig8gyq" path="res://bodies/tile/hex_water.gltf" id="1_8huxm"]
 
