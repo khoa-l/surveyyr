@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d2rq83r473xpu"]
+
+[node name="HexMap" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+cell_size = Vector3(1, 1, 1.732)
