@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2rq1dd8mclhh"]
+
+[ext_resource type="PackedScene" uid="uid://blvypnmdghkp8" path="res://bodies/tile/hex_grass.gltf" id="1_y6meh"]
+[ext_resource type="ArrayMesh" uid="uid://6xbre54cwv77" path="res://bodies/tile/grass_straw.obj" id="2_kg13o"]
+
+[sub_resource type="GDScript" id="GDScript_svmfq"]
+script/source = "extends MeshInstance3D
+
+#var face_count = self.mesh.get_surface_count()
+@export var grass_mesh : Mesh
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+	#for face in range(face_count):
+		#var arrays = mesh.surface_get_arrays(face)
+		#var normals = arrays[Mesh.ARRAY_NORMAL]
+		#var vertices = arrays[Mesh.ARRAY_VERTEX]
+		#
+		#if normals and vertices:
+			#for i in range(vertices.size()):
+				#var normal = normals[i]
+				#var vertex = vertices[i]
+				#
+				#if normal.y > 0.9:
+					#_place_instance_at(vertex)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+	
+#func _place_instance_at(position: Vector3):
+	#var multi_mesh = MultiMesh.new()
+	#multi_mesh.transform_format = MultiMesh.TRANSFORM_3D
+	#multi_mesh.instance_count = 100
+	#multi_mesh.set_mesh(grass_mesh)
+	#
+	#for i in multi_mesh.visible_instance_count:
+		#multi_mesh.set_instance_transform(i, Transform3D(Basis(), position))
+	#
+"
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nu211"]
+data = PackedVector3Array(0, -0.05, -1.1547, -1, -1, -0.5773, 0, -1, -1.1547, 0, -0.05, -1.1547, -1, -0.05, -0.5773, -1, -1, -0.5773, 1, -0.05, 0.5774, 1, -1, -0.5773, 1, -1, 0.5774, 1, -0.05, 0.5774, 1, -0.05, -0.5773, 1, -1, -0.5773, -1, -0.05, -0.5773, -1, -1, 0.5773, -1, -1, -0.5773, -1, -0.05, -0.5773, -1, -0.05, 0.5773, -1, -1, 0.5773, 0, -0.05, 1.1547, 1, -1, 0.5774, 0, -1, 1.1547, 0, -0.05, 1.1547, 1, -0.05, 0.5774, 1, -1, 0.5774, -1, -0.05, 0.5773, 0, -1, 1.1547, -1, -1, 0.5773, -1, -0.05, 0.5773, 0, -0.05, 1.1547, 0, -1, 1.1547, 1, -0.05, -0.5773, 0, 0, -1.097, 0, -0.05, -1.1547, 1, -0.05, -0.5773, 0.95, 0, -0.5485, 0, 0, -1.097, 1, -0.05, 0.5774, 0.95, 0, -0.5485, 1, -0.05, -0.5773, 1, -0.05, 0.5774, 0.95, 0, 0.5485, 0.95, 0, -0.5485, 0, -0.05, 1.1547, 0.95, 0, 0.5485, 1, -0.05, 0.5774, 0, -0.05, 1.1547, 0, 0, 1.097, 0.95, 0, 0.5485, -1, -0.05, 0.5773, 0, 0, 1.097, 0, -0.05, 1.1547, -1, -0.05, 0.5773, -0.95, 0, 0.5485, 0, 0, 1.097, -1, -0.05, -0.5773, -0.95, 0, 0.5485, -1, -0.05, 0.5773, -1, -0.05, -0.5773, -0.95, 0, -0.5485, -0.95, 0, 0.5485, 0, -0.05, -1.1547, -0.95, 0, -0.5485, -1, -0.05, -0.5773, 0, -0.05, -1.1547, 0, 0, -1.097, -0.95, 0, -0.5485, 1, -0.05, -0.5773, 0, -1, -1.1547, 1, -1, -0.5773, 1, -0.05, -0.5773, 0, -0.05, -1.1547, 0, -1, -1.1547, 0, -1, 0, 1, -1, -0.5773, 0, -1, -1.1547, 0, -1, 0, 1, -1, 0.5774, 1, -1, -0.5773, 0, -1, 0, 0, -1, 1.1547, 1, -1, 0.5774, 0, -1, 0, -1, -1, 0.5773, 0, -1, 1.1547, 0, -1, 0, -1, -1, -0.5773, -1, -1, 0.5773, 0, -1, 0, 0, -1, -1.1547, -1, -1, -0.5773, 0, 0, 0, 0, 0, -1.097, 0.95, 0, -0.5485, 0, 0, 0, 0.95, 0, -0.5485, 0.95, 0, 0.5485, 0, 0, 0, 0.95, 0, 0.5485, 0, 0, 1.097, 0, 0, 0, 0, 0, 1.097, -0.95, 0, 0.5485, 0, 0, 0, -0.95, 0, 0.5485, -0.95, 0, -0.5485, 0, 0, 0, -0.95, 0, -0.5485, 0, 0, -1.097)
+
+[node name="hex_grass2" instance=ExtResource("1_y6meh")]
+
+[node name="hex_grass" parent="." index="0"]
+transform = Transform3D(1.00841, 0, 0, 0, 1.0035, 0, 0, 0, 0.999367, 0.00192738, -0.00388968, 0.00259137)
+script = SubResource("GDScript_svmfq")
+grass_mesh = ExtResource("2_kg13o")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="hex_grass" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hex_grass/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_nu211")
