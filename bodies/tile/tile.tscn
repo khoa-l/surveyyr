@@ -11,7 +11,6 @@ data = PackedVector3Array(0, 0, -1.1547, -1, -1, -0.5773, 0, -1, -1.1547, 0, 0, 
 [node name="hex_grass_bottom2" instance=ExtResource("1_mn036")]
 
 [node name="hex_grass_bottom" parent="." index="0"]
-transform = Transform3D(1.13004, 0, 0, 0, 1.13004, 0, 0, 0, 1.13004, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_65txk")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="hex_grass_bottom" index="0"]
