@@ -16,7 +16,7 @@ var is_climbing = false
 
 var gravity = true
 
-func _read():
+func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event: InputEvent) -> void:
