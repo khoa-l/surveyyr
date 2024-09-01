@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://8dt003hfq3ye"]
+
+[ext_resource type="PackedScene" uid="uid://cevt5sllo1bi0" path="res://levels/main.tscn" id="1_bqwhd"]
+[ext_resource type="Script" path="res://levels/test/main-dev/player_dev_label.gd" id="1_nuw1m"]
+
+[sub_resource type="Theme" id="Theme_prvxi"]
+default_font_size = 54
+Label/constants/outline_size = 10
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("1_nuw1m")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+process_mode = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_prvxi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="hexLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "hex: (x, y, z)"
+
+[node name="positionLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "position: (x, y, z)"
+
+[node name="viewLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "view angle: (θ, ϕ)"
+
+[node name="Main" parent="." instance=ExtResource("1_bqwhd")]
+
+[editable path="Main"]

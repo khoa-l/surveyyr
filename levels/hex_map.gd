@@ -1,4 +1,4 @@
-extends Node3D
+class_name HexMap extends Node3D
 
 var map_size = 25
 var tile_size = 2
@@ -169,7 +169,7 @@ func apply_height_based_color(tile, height):
 	material.albedo_color = tile_color
 	tile.get_child(0).set_material_override(material)
 
-func in_map(x, y):
+func in_map(x, y) -> bool:
 	var r = ceil(map_size / 2)
 	var cube = evenr_to_cube(Vector2(x, y))
 	if cube.x <= r and cube.x >= -r and cube.y <= r and cube.y >= -r and cube.z <= r and cube.z >= -r:
