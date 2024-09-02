@@ -63,4 +63,17 @@ size_flags_vertical = 8
 layout_mode = 2
 text = "collision with: (x, y, z)"
 
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="compassLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Bearing: -"
+
+[node name="distLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Hexes Traveled: -"
+
 [node name="RenderContainer" parent="." instance=ExtResource("2_pu4ud")]
