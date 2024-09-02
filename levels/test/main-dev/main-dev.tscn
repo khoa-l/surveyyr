@@ -16,16 +16,17 @@ MarginContainer/constants/margin_top = 20
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_priority = 1
 process_physics_priority = 1
+layer = 0
 script = ExtResource("1_nuw1m")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
-process_mode = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme = SubResource("Theme_prvxi")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
@@ -63,6 +64,3 @@ layout_mode = 2
 text = "collision with: (x, y, z)"
 
 [node name="RenderContainer" parent="." instance=ExtResource("2_pu4ud")]
-
-[editable path="RenderContainer"]
-[editable path="RenderContainer/SubViewportContainer/SubViewport/Main"]

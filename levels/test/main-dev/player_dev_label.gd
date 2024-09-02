@@ -9,11 +9,6 @@ extends CanvasLayer
 @onready var view_label := $"Control/MarginContainer/VBoxContainer/viewLabel"
 @onready var coll_label := $"Control/MarginContainer/VBoxContainer2/collLabel"
 
-func _ready():
-	# Input mustn't be processed otherwise normal functionality is suspended
-	set_process_input(false)
-	set_process_unhandled_input(false)
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#hex_label.text = "hex: %v" % []
