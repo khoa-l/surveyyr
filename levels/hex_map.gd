@@ -180,3 +180,8 @@ func evenr_to_cube(hex):
 	var q = hex.x - (hex.y + (int(hex.y)&1)) / 2
 	var r = hex.y
 	return Vector3(q, r, -q-r)
+
+func cube_to_evenr(cube):
+	var q = cube.x + (cube.y - (int(cube.y)&1)) / 2
+	var r = cube.y
+	return Vector2(q, r)

@@ -25,14 +25,35 @@ func _physics_process(_delta):
 
 
 func closest_hex(x: float, y: float):
-	var t : float = hex_map.tile_size
-	var y_s := t-0.3 # y interval, the spacing between y values in square coords
-	var x_s := t/2
+	var t : float = hex_map.tile_size # The base scale of the grid
+	
+	# y interval, the spacing between y values in square coords
+	var y_s := t-0.3
+	# x interval, the spacing between x...
+	# x intervals are doubled, meaning only every other value is a real hex centerpoint
+	var x_s := t/2.0
+	
+	# CHEAP COMPUTE
 	var p : Vector2 = snapped(Vector2(x, y), Vector2(x_s, y_s))
 	
-	if (fmod(p.y/y_s, t)): # true if y is odd interval
-		p.x = snappedf(p.x-x_s, t)+x_s
-	else:
-		p.x = snappedf(p.x, t)
-		
-	return p
+	# find if p is valid. if so, return and leave program
+	var i := Vector2i(int(p.y/y_s), int(p.x/x_s))
+	# even x intervals are valid at even y intervals; odd x intervals are valid at odd y intervals
+	if (i.y % 2 and i.x % 2): # true if both are odd
+		#print("cheap double odd")
+		#print("intervals: %.0v" % i)
+		#print(p)
+		return p
+	elif (not i.y % 2 and not i.x % 2):
+		#print("cheap double even")
+		#print("intervals: %.0v" % i)
+		#print(p)
+		return p
+	
+	#print("proceeding with point correction")
+	# CORRECTIVE ACTION
+	var x_adj_p := Vector2(p.x-x_s, p.y) if p.x>x else Vector2(p.x+x_s, p.y)
+	var y_adj_p := Vector2(p.x, p.y-y_s) if p.y>y else Vector2(p.x, p.y+y_s)
+	if ((x_adj_p-Vector2(x, y)).length_squared() > (y_adj_p-Vector2(x, y)).length_squared()):
+		return y_adj_p
+	return x_adj_p
