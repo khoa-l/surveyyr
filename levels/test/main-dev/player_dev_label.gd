@@ -9,9 +9,19 @@ extends CanvasLayer
 @onready var view_label := $"Control/MarginContainer/VBoxContainer/viewLabel"
 @onready var coll_label := $"Control/MarginContainer/VBoxContainer2/collLabel"
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+@onready var hexes_traveled_label = $"Control/MarginContainer/VBoxContainer3/distLabel"
+@onready var bearing_label = $"Control/MarginContainer/VBoxContainer3/compassLabel"
+
+@onready var prev_hex := closest_hex(player.position)
+var hexes_traveled := 0
 func _process(delta):
-	hex_label.text = "hex: %.2v" % [closest_hex(player.position)]
+	var hex = closest_hex(player.position)
+	hex_label.text = "hex: %.2v" % [hex]
+	if (hex != prev_hex):
+		hexes_traveled+=1
+	hexes_traveled_label.text = "Hexes Traveled: %d" % hexes_traveled
+	prev_hex = hex
+	
 	position_label.text = "position: %.2v" % [player.position]
 	view_label.text = "view angle: %.1v" % [player_view.global_rotation/PI/2 * 360.0]
 	
@@ -24,7 +34,7 @@ func _physics_process(_delta):
 		coll_label.text = "collision with: %.2v" % s.global_position
 
 
-func closest_hex(v: Vector3):
+func closest_hex(v: Vector3) -> Vector2:
 	var x := v.x
 	var y := v.z
 	var t : float = hex_map.tile_size # The base scale of the grid
