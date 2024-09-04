@@ -15,9 +15,9 @@ extends CanvasLayer
 @onready var prev_hex := closest_hex(player.position)
 var hexes_traveled := 0
 func _process(delta):
-	var hex = closest_hex(player.position)
+	var hex := closest_hex(player.position)
 	hex_label.text = "hex: %.2v" % [hex]
-	if (hex != prev_hex):
+	if (not hex.is_equal_approx(prev_hex)):
 		hexes_traveled+=1
 	hexes_traveled_label.text = "Hexes Traveled: %d" % hexes_traveled
 	prev_hex = hex
