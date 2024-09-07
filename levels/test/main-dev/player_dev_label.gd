@@ -1,7 +1,8 @@
 extends CanvasLayer
 
 @onready var player : CharacterBody3D = $"/root/Node/RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor"
-@onready var player_view := $"/root/Node/RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor/Head/Camera3D"
+@onready var player_head : Node3D = $"/root/Node/RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor/Head"
+@onready var player_view : Camera3D = $"/root/Node/RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor/Head/Camera3D"
 @onready var hex_map : HexMap = $"/root/Node/RenderContainer/SubViewportContainer/SubViewport/Main/HexMap"
 
 @onready var hex_label := $"Control/MarginContainer/VBoxContainer/hexLabel"
@@ -14,6 +15,10 @@ extends CanvasLayer
 
 @onready var prev_hex := closest_hex(player.position)
 var hexes_traveled := 0
+
+var snap_rate := 0.05
+var compass_state := false
+
 func _process(delta):
 	var hex := closest_hex(player.position)
 	hex_label.text = "hex: %.2v" % [hex]
@@ -27,6 +32,15 @@ func _process(delta):
 	position_label.text = "position: %.2v" % [player.position]
 	view_label.text = "view angle: %.1v" % [player_view.global_rotation/PI/2 * 360.0]
 	
+	if Input.is_action_just_pressed("s_compass"):
+		compass_state = !compass_state
+	# magnetize to closest degree divisible by 5
+	if compass_state: 
+		var r := player_head.global_rotation.y
+		var targ : float = snapped(r, 5/(180/PI))
+		var dist : float = r - targ
+		r = clampf(r - delta*snap_rate/(dist**2), targ, r)
+		player_head.global_rotation.y = r
 
 func _physics_process(_delta):
 	if (player.get_slide_collision_count()>0):
@@ -41,26 +55,28 @@ func bearing(r: Vector3):
 	# vector has been normalized 0-1
 	r *= 6
 	var b: String
-	match int(snapped(r.y, 1.0)):
-		0, 6:
+	match int(snapped(r.y+.5, 1.0)):
+		1, 7:
 			b = "A"
-		1:
-			b = "F"
 		2:
-			b = "E"
+			b = "F"
 		3:
-			b = "S"
+			b = "E"
 		4:
-			b = "W"
+			b = "S"
 		5:
+			b = "W"
+		6:
 			b = "V"
 		_:
 			b = "InvalidSign"
-	var remainder = r.y - snapped(r.y, 1.0)
-	b = "%s %s%dº" % [b,
-		"+" if remainder > 0 else "-",
-		int(snapped(abs(remainder*360/6),1))
-	]
+	var remainder = r.y+.5 - snapped(r.y+.5, 1.0)
+	remainder = snapped(remainder*360/5, 5)
+	if remainder != 0.0:
+		b = "%s %s%dº" % [b,
+			"+" if remainder > 0 else "-",
+			int(abs(remainder))
+		]
 	return b
 
 func closest_hex(v: Vector3) -> Vector2:
