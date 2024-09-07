@@ -22,6 +22,8 @@ func _process(delta):
 	hexes_traveled_label.text = "Hexes Traveled: %d" % hexes_traveled
 	prev_hex = hex
 	
+	bearing_label.text = "Bearing: %s" % bearing(player_view.global_rotation)
+	
 	position_label.text = "position: %.2v" % [player.position]
 	view_label.text = "view angle: %.1v" % [player_view.global_rotation/PI/2 * 360.0]
 	
@@ -33,6 +35,33 @@ func _physics_process(_delta):
 		#print(PhysicsServer3D.body_get_direct_state(c.get_collider_rid()).transform)
 		coll_label.text = "collision with: %.2v" % s.global_position
 
+func bearing(r: Vector3):
+	r /= 2*PI
+	r += Vector3(.5,.5,.5)
+	# vector has been normalized 0-1
+	r *= 6
+	var b: String
+	match int(snapped(r.y, 1.0)):
+		0, 6:
+			b = "A"
+		1:
+			b = "F"
+		2:
+			b = "E"
+		3:
+			b = "S"
+		4:
+			b = "W"
+		5:
+			b = "V"
+		_:
+			b = "InvalidSign"
+	var remainder = r.y - snapped(r.y, 1.0)
+	b = "%s %s%dº" % [b,
+		"+" if remainder > 0 else "-",
+		int(snapped(abs(remainder*360/6),1))
+	]
+	return b
 
 func closest_hex(v: Vector3) -> Vector2:
 	var x := v.x

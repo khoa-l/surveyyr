@@ -77,6 +77,3 @@ layout_mode = 2
 text = "Hexes Traveled: -"
 
 [node name="RenderContainer" parent="." instance=ExtResource("2_pu4ud")]
-
-[editable path="RenderContainer"]
-[editable path="RenderContainer/SubViewportContainer/SubViewport/Main"]
