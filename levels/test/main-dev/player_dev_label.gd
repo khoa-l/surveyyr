@@ -39,6 +39,7 @@ func _process(delta):
 		var r := player_head.global_rotation.y
 		var targ : float = snapped(r, 5/(180/PI))
 		var dist : float = r - targ
+		print(r - delta * snap_rate*(dist**2))
 		r = clampf(r - delta*snap_rate/(dist**2), targ, r)
 		player_head.global_rotation.y = r
 
