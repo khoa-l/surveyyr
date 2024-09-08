@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://8dt003hfq3ye"]
+
+[ext_resource type="Script" path="res://levels/test/main-dev/player_dev_label.gd" id="1_nuw1m"]
+[ext_resource type="PackedScene" uid="uid://dool0ib5q65x1" path="res://levels/render_container.tscn" id="2_pu4ud"]
+
+[sub_resource type="Theme" id="Theme_prvxi"]
+default_font_size = 54
+Label/constants/outline_size = 10
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 50
+MarginContainer/constants/margin_top = 20
+
+[node name="Node" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_priority = 1
+process_physics_priority = 1
+layer = 0
+script = ExtResource("1_nuw1m")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = SubResource("Theme_prvxi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="hexLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "hex: (q, r)"
+
+[node name="positionLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "position: (x, y, z)"
+
+[node name="viewLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "view angle: (θ, ϕ)"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="collLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+text = "collision with: (x, y, z)"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="compassLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Bearing: -"
+
+[node name="distLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Hexes Traveled: -"
+
+[node name="RenderContainer" parent="." instance=ExtResource("2_pu4ud")]

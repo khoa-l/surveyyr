@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpvh5cprletv1"]
+
+[ext_resource type="Script" path="res://bodies/surveyor.gd" id="1_fphx8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vw6jy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy6pe"]
+
+[node name="Surveyor" type="CharacterBody3D"]
+script = ExtResource("1_fphx8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_vw6jy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_uy6pe")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00135589, 0.00229096, -6.75917e-05)
+
+[node name="LedgeCheck" type="RayCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -0.5)
+target_position = Vector3(0, 0, -0.5)
+
+[node name="WallCheck" type="RayCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -0.5)
+target_position = Vector3(0, 0, -0.5)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.653167, 0)

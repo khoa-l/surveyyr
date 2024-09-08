@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2phfk4dfo7op"]
+
+[ext_resource type="Script" path="res://levels/menu.gd" id="1_v0wla"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_v0wla")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 264.0
+offset_right = 1153.0
+offset_bottom = 389.0
+theme_override_font_sizes/font_size = 50
+text = "PLAY"
+
+[node name="Options" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 448.0
+offset_right = 1152.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 50
+text = "OPTIONS"
+
+[node name="Quit" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 648.0
+offset_right = 1152.0
+offset_bottom = 768.0
+theme_override_font_sizes/font_size = 50
+text = "QUIT"
+
+[connection signal="pressed" from="Control/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
