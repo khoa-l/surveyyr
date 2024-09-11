@@ -13,9 +13,9 @@ max_value = 360.0
 _data = [Vector2(0, 324.927), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Node3D" type="Node3D"]
+[node name="Particles" type="Node3D"]
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="Leaves" type="CPUParticles3D" parent="."]
 amount = 3
 lifetime = 5.0
 explosiveness = 0.5

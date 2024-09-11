@@ -15,5 +15,5 @@ data = PackedVector3Array(0.0717, 0.8483, 3.1298, 0.0717, 0.7424, 3.2264, 0.0717
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/Root/Plane/Plane_0/TreeTrunk/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_84p2a")
 
-[node name="Node3D" parent="Sketchfab_model" index="1" instance=ExtResource("2_emh6b")]
+[node name="Particles" parent="Sketchfab_model" index="1" instance=ExtResource("2_emh6b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.616)

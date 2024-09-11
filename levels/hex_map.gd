@@ -154,6 +154,9 @@ func is_valid_placement(tile_pos: Vector3, pos: Vector3, placed_trees: Array) ->
 
 func place_tree(parent_tile, local_pos):
 	var tree = preload("res://bodies/tile/tree.tscn").instantiate()
+	var leaves = tree.get_node("Sketchfab_model/Particles").get_child(0)
+	leaves.lifetime = randi_range(4, 6)
+	leaves.explosiveness = randf_range(0.5, 0.75)
 	
 	var random_scale = randf_range(MIN_SCALE, MAX_SCALE)
 	tree.scale = Vector3(random_scale, random_scale, random_scale)
