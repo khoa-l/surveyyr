@@ -1,6 +1,5 @@
-[gd_scene load_steps=21 format=3 uid="uid://cevt5sllo1bi0"]
+[gd_scene load_steps=20 format=3 uid="uid://cevt5sllo1bi0"]
 
-[ext_resource type="Script" path="res://levels/main.gd" id="1_472wd"]
 [ext_resource type="Script" path="res://levels/hex_map.gd" id="1_cj7xh"]
 [ext_resource type="PackedScene" uid="uid://bpvh5cprletv1" path="res://bodies/surveyor.tscn" id="2_m6ida"]
 [ext_resource type="Shader" path="res://sky.gdshader" id="3_muxfu"]
@@ -88,7 +87,6 @@ volumetric_fog_sky_affect = 0.255
 [sub_resource type="Compositor" id="Compositor_qiib6"]
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_472wd")
 
 [node name="HexMap" type="Node3D" parent="."]
 transform = Transform3D(1, -1.49012e-08, -1.49012e-08, -1.49012e-08, 1, -2.98023e-08, -1.49012e-08, 0, 1, 0, 0, 0)
