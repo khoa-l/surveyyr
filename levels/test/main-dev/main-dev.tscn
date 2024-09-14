@@ -87,7 +87,6 @@ script = ExtResource("3_3wabg")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor/MeasuringWheel"]
 process_mode = 4
-layer = 2
 
 [node name="Control" type="Control" parent="RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor/MeasuringWheel/CanvasLayer"]
 layout_mode = 3

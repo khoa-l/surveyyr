@@ -27,9 +27,12 @@ func _physics_process(delta):
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and (player.position == where_to_be):
-		traversed += 1
 		var where := map.closest_hex(player.position+(direction * map.tile_size))
-		where_to_be = Vector3(where.x, player.position.y, where.y)
+		var test_where_to_be = Vector3(where.x, player.position.y, where.y)
+		
+		if (not player.test_move(player.transform, test_where_to_be - player.position)):
+			traversed += 1
+			where_to_be = test_where_to_be
 	
 	var dist := where_to_be - player.position
 	if (dist.length() < 0.01):
