@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://8dt003hfq3ye"]
+[gd_scene load_steps=7 format=3 uid="uid://8dt003hfq3ye"]
 
 [ext_resource type="Script" path="res://levels/test/main-dev/player_dev_label.gd" id="1_nuw1m"]
 [ext_resource type="PackedScene" uid="uid://dool0ib5q65x1" path="res://levels/render_container.tscn" id="2_pu4ud"]
+[ext_resource type="Script" path="res://levels/test/main-dev/measuring_wheel.gd" id="3_3wabg"]
 [ext_resource type="Script" path="res://levels/test/main-dev/overhead-cam.gd" id="3_pxx4a"]
 
 [sub_resource type="Theme" id="Theme_prvxi"]
@@ -87,6 +88,9 @@ size_flags_vertical = 0
 texture = SubResource("ViewportTexture_mr5bq")
 
 [node name="RenderContainer" parent="." instance=ExtResource("2_pu4ud")]
+
+[node name="MeasuringWheel" type="Node" parent="RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor" index="0"]
+script = ExtResource("3_3wabg")
 
 [node name="SubViewport" type="SubViewport" parent="RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor/Head" index="3"]
 size = Vector2i(432, 432)
