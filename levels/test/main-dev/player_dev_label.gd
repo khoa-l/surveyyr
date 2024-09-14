@@ -20,7 +20,7 @@ var snap_rate := 0.05
 var compass_state := false
 
 func _process(delta):
-	var hex := closest_hex(player.position)
+	var hex := hex_map.closest_hex(player.position)
 	hex_label.text = "hex: %.2v" % [hex]
 	if (not hex.is_equal_approx(prev_hex)):
 		hexes_traveled+=1
