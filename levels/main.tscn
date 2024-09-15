@@ -1,12 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cevt5sllo1bi0"]
+[gd_scene load_steps=19 format=3 uid="uid://cevt5sllo1bi0"]
 
 [ext_resource type="Script" path="res://levels/hex_map.gd" id="1_cj7xh"]
 [ext_resource type="PackedScene" uid="uid://bpvh5cprletv1" path="res://bodies/surveyor.tscn" id="2_m6ida"]
 [ext_resource type="Shader" path="res://sky.gdshader" id="3_muxfu"]
-
-[sub_resource type="Curve" id="Curve_4yd0e"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.559611, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.20326), 0.0, 0.0, 0, 0]
-point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_gbip8"]
 offsets = PackedFloat32Array(0.6, 0.7)
@@ -91,7 +87,6 @@ volumetric_fog_sky_affect = 0.255
 [node name="HexMap" type="Node3D" parent="."]
 transform = Transform3D(1, -1.49012e-08, -1.49012e-08, -1.49012e-08, 1, -2.98023e-08, -1.49012e-08, 0, 1, 0, 0, 0)
 script = ExtResource("1_cj7xh")
-TREE_DISTRIBUTION_CURVE = SubResource("Curve_4yd0e")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.293697, -0.617218, -0.729921, -0.814704, -0.237786, 0.528882, -0.5, 0.75, -0.433013, 0.00702667, -0.263783, -0.160913)
