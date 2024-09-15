@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3cj28puusdn1"]
+
+[ext_resource type="PackedScene" uid="uid://tj3cyphhyta7" path="res://bodies/just_tree/BirchTree_4.fbx" id="1_o6xvf"]
+[ext_resource type="Texture2D" uid="uid://b5j810ev8ivhc" path="res://bodies/just_tree/textures/BirchTree_Bark.png" id="2_xg28y"]
+[ext_resource type="Texture2D" uid="uid://8lenx6px4jua" path="res://bodies/just_tree/textures/BirchTree_Bark_Normal.png" id="3_ur0ew"]
+[ext_resource type="Texture2D" uid="uid://c4n0lpceot3gs" path="res://bodies/just_tree/textures/BirchTree_Leaves.png" id="4_jc184"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0k7n4"]
+albedo_texture = ExtResource("2_xg28y")
+normal_enabled = true
+normal_texture = ExtResource("3_ur0ew")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iu1sc"]
+transparency = 4
+albedo_texture = ExtResource("4_jc184")
+
+[node name="BirchTree_4" instance=ExtResource("1_o6xvf")]
+
+[node name="BirchTree_4" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0k7n4")
+surface_material_override/1 = SubResource("StandardMaterial3D_iu1sc")

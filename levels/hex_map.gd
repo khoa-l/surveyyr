@@ -1,10 +1,16 @@
 class_name HexMap
 extends Node3D
 
-const WATER_TILE = preload("res://bodies/tile/water.tscn")
-const GRASS_TILE = preload("res://bodies/tile/grass.tscn")
-const DIRT_TILE = preload("res://bodies/tile/tile.tscn")
-const TREE = preload("res://bodies/tile/tree.tscn")
+const WATER_TILE = preload("res://bodies/tiles/water.tscn")
+const GRASS_TILE = preload("res://bodies/tiles/grass.tscn")
+const DIRT_TILE = preload("res://bodies/tiles/dirt.tscn")
+const TREE = preload("res://bodies/just_tree/birch_tree_1.tscn")
+const TREE2 = preload("res://bodies/just_tree/birch_tree_2.tscn")
+const TREE3 = preload("res://bodies/just_tree/birch_tree_3.tscn")
+const TREE4 = preload("res://bodies/just_tree/birch_tree_4.tscn")
+const TREE5 = preload("res://bodies/just_tree/birch_tree_5.tscn")
+
+var trees = ["TREE", "TREE2", "TREE3", "TREE4", "TREE5"]
 
 @export var map_size: int = 25
 @export var tile_size: float = 2.0
@@ -14,7 +20,7 @@ const TREE = preload("res://bodies/tile/tree.tscn")
 @export var terrain_color_variation: float = 0.1
 
 @export_group("Tree Settings")
-@export var tree_density: float = 0.5
+@export var tree_density: float = 1.0
 @export var max_trees_per_tile: int = 5
 @export var min_tree_spacing: float = 0.25
 @export var tree_noise_scale: float = 0.1
@@ -144,7 +150,13 @@ func apply_vertical_gradient(noise_value: float, y: float) -> float:
 	return noise_value * pow(gradient, 2)
 
 func place_tree(parent_tile: Node3D, local_pos: Vector3) -> void:
-	var tree = TREE.instantiate()
+	# Choose a random tree name from the array
+	var random_index = randi() % trees.size()
+	var random_tree_name = trees[random_index]
+	
+	# Use get() to access the variable by its name string
+	var tree_scene = get(random_tree_name)
+	var tree = tree_scene.instantiate()
 	var random_scale = randf_range(min_scale, max_scale)
 	tree.scale = Vector3.ONE * random_scale
 	
