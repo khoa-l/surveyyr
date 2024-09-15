@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3 uid="uid://dgim6f5wnv7ft"]
+
+[resource]
+default_font_size = 54
+Label/constants/outline_size = 10
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 50
+MarginContainer/constants/margin_top = 20

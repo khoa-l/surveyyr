@@ -11,6 +11,8 @@ data = PackedVector3Array(0.0717, 0.8483, 3.1298, 0.0717, 0.7424, 3.2264, 0.0717
 [node name="TreeTrunk" type="Node3D" parent="Sketchfab_model/Root/Plane/Plane_0" index="0"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/Root/Plane/Plane_0/TreeTrunk" index="0"]
+collision_layer = 2
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/Root/Plane/Plane_0/TreeTrunk/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_84p2a")
