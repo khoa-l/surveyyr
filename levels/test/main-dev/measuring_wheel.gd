@@ -50,10 +50,14 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("s_wheel"):
-		traversed = 0
-		var p := is_physics_processing()
-		call_deferred("set_physics_process", !p)
-		label.visible = !p
-		player.call_deferred("set_physics_process", p)
+		var p := is_physics_processing() # get toggle variable
+		traversed = 0 # reset hex counter
+		# set hex we should be at
 		var where := map.closest_hex(player.position)
 		where_to_be = Vector3(where.x, player.position.y, where.y)
+		
+		# toggle all relevant states
+		label.visible = !p
+		call_deferred("set_physics_process", !p)
+		player.call_deferred("set_physics_process", p)
+		player.call_deferred("set_collision_mask_value", 2, p)
