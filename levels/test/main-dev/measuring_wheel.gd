@@ -25,13 +25,15 @@ func _process(delta):
 
 func _physics_process(delta):
 	# Normal gravity calc
-	if player.gravity and not player.is_on_floor():
+	if player.gravity and not player.test_move(player.transform, Vector3(0,-0.01, 0)):
 		player.velocity += player.get_gravity() * delta
+	where_to_be.y = player.position.y # compensation for gravity
 	
 	# Test if we need to move to another hex
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and (player.position.is_equal_approx(where_to_be)):
+		player.velocity = Vector3(0,0,0)
 		var where := map.closest_hex(player.position+(direction * map.tile_size))
 		var test_where_to_be = Vector3(where.x, player.position.y, where.y)
 		
@@ -47,6 +49,8 @@ func _physics_process(delta):
 	else:
 		var move : Vector3 = dist.normalized() * delta
 		player.position += move
+	# NOTE: velocity only used for gravity
+	player.move_and_collide(player.velocity * delta)
 
 func _input(event):
 	if event.is_action_pressed("s_wheel"):
@@ -59,5 +63,6 @@ func _input(event):
 		# toggle all relevant states
 		label.visible = !p
 		call_deferred("set_physics_process", !p)
+		player.set_deferred("velocity", Vector3(0,0,0))
 		player.call_deferred("set_physics_process", p)
 		player.call_deferred("set_collision_mask_value", 2, p)

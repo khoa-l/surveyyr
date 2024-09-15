@@ -82,6 +82,9 @@ texture = SubResource("ViewportTexture_mr5bq")
 
 [node name="RenderContainer" parent="." instance=ExtResource("2_pu4ud")]
 
+[node name="Surveyor" parent="RenderContainer/SubViewportContainer/SubViewport/Main" index="2"]
+collision_mask = 1
+
 [node name="MeasuringWheel" type="Node" parent="RenderContainer/SubViewportContainer/SubViewport/Main/Surveyor" index="0"]
 script = ExtResource("3_3wabg")
 
